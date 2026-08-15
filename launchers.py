@@ -12,6 +12,7 @@ import subprocess
 
 _LOCAL = os.environ.get("LOCALAPPDATA", "")
 _PROGRAMS = os.environ.get("ProgramFiles", r"C:\Program Files")
+_WHALE = os.path.join(_PROGRAMS, "Naver", "Naver Whale", "Application", "whale.exe")
 
 # A launch target is either:
 #   str  -- handed to ShellExecute: a URL, a document, an executable path, or
@@ -46,6 +47,10 @@ LAUNCH_TARGETS = {
     "user-f": "discord://-/users/245864172070371328",
     "user-p": "discord://-/users/419942019478323200",
     "user-r": "discord://-/users/365231203478929409",
+    # Handing a URL to a running Chromium browser opens it as a new tab in the
+    # existing window; if Whale is closed it starts and opens the URL.
+    "openmelodies": [_WHALE, "https://openmelodies.online/"],
+    "songmaker": [_WHALE, "http://localhost:3456/songmaker"],
 }
 
 # Image names for taskkill. Note the Claude desktop app and the Claude Code
