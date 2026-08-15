@@ -50,7 +50,7 @@ LAUNCH_TARGETS = {
     "dm-r": "discord://-/channels/@me/988496287043297340",
     # Handing a URL to a running Chromium browser opens it as a new tab in the
     # existing window; if Whale is closed it starts and opens the URL.
-    "openmelodies": [_WHALE, "https://openmelodies.online/"],
+    "openmelodies": [_WHALE, "https://openmelodies.online/songmaker"],
     "songmaker": [_WHALE, "http://localhost:3456/songmaker"],
 }
 
