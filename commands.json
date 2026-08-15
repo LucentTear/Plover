@@ -4,5 +4,12 @@
     "SK": "{PLOVER:LAUNCH:github}",
     "SKW": "{PLOVER:CLOSE:github}",
     "TK": "{PLOVER:LAUNCH:discord}",
-    "TKP": "{PLOVER:CLOSE:discord}"
+    "TKP": "{PLOVER:CLOSE:discord}",
+    "TK-F": "{PLOVER:LAUNCH:user-f}",
+    "TK-P": "{PLOVER:LAUNCH:user-p}",
+    "TK-R": "{PLOVER:LAUNCH:user-r}",
+    "PW": "{PLOVER:LAUNCH:obsidian}",
+    "PWH": "{PLOVER:CLOSE:obsidian}",
+    "HR": "{PLOVER:LAUNCH:clipstudio}",
+    "PHR": "{PLOVER:CLOSE:clipstudio}"
 }

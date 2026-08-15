@@ -11,16 +11,17 @@ import os
 import subprocess
 
 _LOCAL = os.environ.get("LOCALAPPDATA", "")
+_PROGRAMS = os.environ.get("ProgramFiles", r"C:\Program Files")
 
 # A launch target is either:
 #   str  -- handed to ShellExecute: a URL, a document, an executable path, or
 #           "shell:AppsFolder\<AppUserModelId>" for a packaged (Store) app.
 #   list -- an argv passed straight to Popen, for launchers needing arguments.
 #
-# Every entry below deliberately avoids version-numbered paths. Claude is a
-# packaged app, so its AUMID is stable across updates. GitHub Desktop and
-# Discord are Squirrel installs that keep versioned app-x.y.z folders; both
-# ship a stable stub at the install root that redirects to the current one.
+# Version-numbered paths are avoided wherever an alternative exists. Claude is
+# a packaged app, so its AUMID is stable. GitHub Desktop and Discord are
+# Squirrel installs keeping versioned app-x.y.z folders, but both ship a stable
+# stub at the install root. Obsidian installs to a flat directory.
 LAUNCH_TARGETS = {
     "claude": r"shell:AppsFolder\Claude_pzs8sxrjxfjjc!Claude",
     "github": os.path.join(_LOCAL, "GitHubDesktop", "GitHubDesktop.exe"),
@@ -31,6 +32,20 @@ LAUNCH_TARGETS = {
         "--processStart",
         "Discord.exe",
     ],
+    "obsidian": os.path.join(_LOCAL, "Programs", "Obsidian", "Obsidian.exe"),
+    # CELSYS keeps the product folder at "CLIP STUDIO 1.5" across releases, but
+    # it is the one launch path here carrying a version number: if a future
+    # install moves it, launch() reports the missing path rather than failing
+    # silently. This targets PAINT directly, not the CLIP STUDIO hub launcher.
+    "clipstudio": os.path.join(
+        _PROGRAMS, "CELSYS", "CLIP STUDIO 1.5", "CLIP STUDIO PAINT",
+        "CLIPStudioPaint.exe",
+    ),
+    # Discord deep links. The "-/" is a required placeholder in the scheme.
+    # Rename these keys freely -- the key is just what the stroke passes.
+    "user-f": "discord://-/users/245864172070371328",
+    "user-p": "discord://-/users/419942019478323200",
+    "user-r": "discord://-/users/365231203478929409",
 }
 
 # Image names for taskkill. Note the Claude desktop app and the Claude Code
@@ -40,6 +55,8 @@ CLOSE_TARGETS = {
     "claude": "Claude.exe",
     "github": "GitHubDesktop.exe",
     "discord": "Discord.exe",
+    "obsidian": "Obsidian.exe",
+    "clipstudio": "CLIPStudioPaint.exe",
 }
 
 
