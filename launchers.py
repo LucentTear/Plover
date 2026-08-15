@@ -42,11 +42,12 @@ LAUNCH_TARGETS = {
         _PROGRAMS, "CELSYS", "CLIP STUDIO 1.5", "CLIP STUDIO PAINT",
         "CLIPStudioPaint.exe",
     ),
-    # Discord deep links. The "-/" is a required placeholder in the scheme.
-    # Rename these keys freely -- the key is just what the stroke passes.
-    "user-f": "discord://-/users/245864172070371328",
-    "user-p": "discord://-/users/419942019478323200",
-    "user-r": "discord://-/users/365231203478929409",
+    # Discord DM deep links. The "-/" is a required placeholder in the scheme.
+    # These are DM *channel* ids, not user ids: a user id resolves only to a
+    # profile, while the channel id opens the conversation itself.
+    "dm-f": "discord://-/channels/@me/711465226909777920",
+    "dm-p": "discord://-/channels/@me/1264702462619553894",
+    "dm-r": "discord://-/channels/@me/988496287043297340",
     # Handing a URL to a running Chromium browser opens it as a new tab in the
     # existing window; if Whale is closed it starts and opens the URL.
     "openmelodies": [_WHALE, "https://openmelodies.online/"],
