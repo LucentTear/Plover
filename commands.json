@@ -1,3 +1,4 @@
 {
-    "ST": "{PLOVER:CLAUDE}"
+    "ST": "{PLOVER:LAUNCH:claude}",
+    "STP": "{PLOVER:CLOSE:claude}"
 }
