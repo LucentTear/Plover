@@ -1,4 +1,8 @@
 {
     "ST": "{PLOVER:LAUNCH:claude}",
-    "STP": "{PLOVER:CLOSE:claude}"
+    "STP": "{PLOVER:CLOSE:claude}",
+    "SK": "{PLOVER:LAUNCH:github}",
+    "SKW": "{PLOVER:CLOSE:github}",
+    "TK": "{PLOVER:LAUNCH:discord}",
+    "TKP": "{PLOVER:CLOSE:discord}"
 }

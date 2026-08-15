@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plover-claude"
-version = "2.0.0"
+version = "2.1.0"
 description = "Plover command plugin that opens and closes programs by name"
 requires-python = ">=3.9"
 dependencies = []
