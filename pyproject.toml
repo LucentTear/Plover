@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plover-claude"
+version = "1.0.0"
+description = "Plover command plugin that opens a new Claude chat"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.entry-points."plover.command"]
+CLAUDE = "claude:launch_claude"
+
+[tool.setuptools]
+py-modules = ["claude"]
