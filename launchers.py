@@ -126,7 +126,18 @@ def close(translator, argument):
     # taskkill exits 128 when nothing matched: closing what is already closed
     # is not an error worth surfacing to Plover.
     if result.returncode not in (0, 128):
+        detail = result.stderr.strip()
+        if "Access is denied" in detail:
+            # Windows forbids a medium-integrity process from terminating a
+            # high-integrity one. Nothing here can work around that, so say
+            # what the actual remedy is rather than repeating taskkill.
+            raise RuntimeError(
+                f"{', '.join(images)} is running elevated, so Plover cannot "
+                f"close it. Start the program from Plover rather than from a "
+                f"tray helper or elevated launcher, or run Plover itself as "
+                f"administrator. ({detail})"
+            )
         raise RuntimeError(
             f"taskkill failed for {', '.join(images)} "
-            f"(exit {result.returncode}): {result.stderr.strip()}"
+            f"(exit {result.returncode}): {detail}"
         )
