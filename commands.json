@@ -20,5 +20,5 @@
     "-BG": "{PLOVER:LAUNCH:colorwheel}",
     "-GS": "{PLOVER:LAUNCH:colorpicker}",
     "-DZ": "{PLOVER:LAUNCH:ocam}",
-    "-TDZ": "{PLOVER:CLOSE:ocam}"
+    "-TSDZ": "{PLOVER:CLOSE:ocam}"
 }
