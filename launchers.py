@@ -12,6 +12,7 @@ import subprocess
 
 _LOCAL = os.environ.get("LOCALAPPDATA", "")
 _PROGRAMS = os.environ.get("ProgramFiles", r"C:\Program Files")
+_PROGRAMS_X86 = os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")
 _WHALE = os.path.join(_PROGRAMS, "Naver", "Naver Whale", "Application", "whale.exe")
 
 # A launch target is either:
@@ -52,6 +53,12 @@ LAUNCH_TARGETS = {
     # existing window; if Whale is closed it starts and opens the URL.
     "openmelodies": [_WHALE, "https://openmelodies.online/songmaker"],
     "songmaker": [_WHALE, "http://localhost:3456/songmaker"],
+    # Colour tools. Routed through Whale explicitly rather than the default
+    # browser so the stroke keeps working if the default ever changes.
+    "coolors": [_WHALE, "https://coolors.co/generate"],
+    "colorwheel": [_WHALE, "https://htmlcolorcodes.com/color-wheel/"],
+    "colorpicker": [_WHALE, "https://imagecolorpicker.com/"],
+    "ocam": os.path.join(_PROGRAMS_X86, "oCam", "oCam.exe"),
 }
 
 # Image names for taskkill. Note the Claude desktop app and the Claude Code
@@ -63,6 +70,9 @@ CLOSE_TARGETS = {
     "discord": "Discord.exe",
     "obsidian": "Obsidian.exe",
     "clipstudio": "CLIPStudioPaint.exe",
+    # Only the recorder itself; oCamTask.exe is a separate background helper
+    # and taskkill matches whole image names, so it is left alone.
+    "ocam": "oCam.exe",
 }
 
 

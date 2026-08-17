@@ -13,5 +13,10 @@
     "HR": "{PLOVER:LAUNCH:clipstudio}",
     "PHR": "{PLOVER:CLOSE:clipstudio}",
     "AO": "{PLOVER:LAUNCH:openmelodies}",
-    "EU": "{PLOVER:LAUNCH:songmaker}"
+    "EU": "{PLOVER:LAUNCH:songmaker}",
+    "-RB": "{PLOVER:LAUNCH:coolors}",
+    "-BG": "{PLOVER:LAUNCH:colorwheel}",
+    "-GS": "{PLOVER:LAUNCH:colorpicker}",
+    "-DZ": "{PLOVER:LAUNCH:ocam}",
+    "-TDZ": "{PLOVER:CLOSE:ocam}"
 }
