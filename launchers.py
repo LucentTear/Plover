@@ -72,10 +72,19 @@ CLOSE_TARGETS = {
     "discord": "Discord.exe",
     "obsidian": "Obsidian.exe",
     "clipstudio": "CLIPStudioPaint.exe",
-    # Only the recorder itself; oCamTask.exe is a separate background helper
-    # and taskkill matches whole image names, so it is left alone.
-    "ocam": "oCam.exe",
+    "ocam": ["oCam.exe", "oCamTask.exe"],
 }
+
+# taskkill's graceful mode posts WM_CLOSE to top-level windows, so a process
+# without one can never be closed that way. These are terminated with /F
+# instead. Only safe for helpers holding no unsaved state -- the recorder
+# itself is closed gracefully so it can finalise any recording in progress.
+#
+# These kills are best effort: oCamTask.exe runs with an elevated token, so
+# taskkill is denied unless Plover itself runs elevated. Raising there would
+# post a Plover error on every stroke, which is worse than the helper
+# surviving, so failures in this group are ignored.
+_FORCE_CLOSE = {"oCamTask.exe"}
 
 
 def _resolve(table, argument, verb):
@@ -107,20 +116,37 @@ def launch(translator, argument):
     os.startfile(target)
 
 
-def close(translator, argument):
-    image = _resolve(CLOSE_TARGETS, argument, "close")
-    # No /F: taskkill asks the windows to close so the app can save state and
-    # shut down cleanly. A hung app may ignore it -- that is the tradeoff.
+def _taskkill(images, force, required=True):
+    argv = ["taskkill"]
+    for image in images:
+        argv += ["/IM", image]
+    if force:
+        argv.append("/F")
     result = subprocess.run(
-        ["taskkill", "/IM", image],
+        argv,
         capture_output=True,
         text=True,
         creationflags=subprocess.CREATE_NO_WINDOW,
     )
     # taskkill exits 128 when nothing matched: closing what is already closed
     # is not an error worth surfacing to Plover.
-    if result.returncode not in (0, 128):
+    if required and result.returncode not in (0, 128):
         raise RuntimeError(
-            f"taskkill failed for {image} "
+            f"taskkill failed for {', '.join(images)} "
             f"(exit {result.returncode}): {result.stderr.strip()}"
         )
+    return result.returncode
+
+
+def close(translator, argument):
+    images = _resolve(CLOSE_TARGETS, argument, "close")
+    if isinstance(images, str):
+        images = [images]
+    # Split so each group gets the only mode that can work on it, and so a
+    # failure to force-kill a helper is reported separately from the app.
+    graceful = [i for i in images if i not in _FORCE_CLOSE]
+    forced = [i for i in images if i in _FORCE_CLOSE]
+    if graceful:
+        _taskkill(graceful, force=False)
+    if forced:
+        _taskkill(forced, force=True, required=False)
