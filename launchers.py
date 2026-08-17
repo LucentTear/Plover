@@ -53,6 +53,8 @@ LAUNCH_TARGETS = {
     # existing window; if Whale is closed it starts and opens the URL.
     "openmelodies": [_WHALE, "https://openmelodies.online/songmaker"],
     "songmaker": [_WHALE, "http://localhost:3456/songmaker"],
+    "studio": [_WHALE, "https://openmelodies.online/blog/studio"],
+    "docs": [_WHALE, "https://openmelodies.online/docs"],
     # Colour tools. Routed through Whale explicitly rather than the default
     # browser so the stroke keeps working if the default ever changes.
     "coolors": [_WHALE, "https://coolors.co/generate"],

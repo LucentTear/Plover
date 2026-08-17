@@ -14,6 +14,8 @@
     "PHR": "{PLOVER:CLOSE:clipstudio}",
     "AO": "{PLOVER:LAUNCH:openmelodies}",
     "EU": "{PLOVER:LAUNCH:songmaker}",
+    "AOE": "{PLOVER:LAUNCH:studio}",
+    "AOEU": "{PLOVER:LAUNCH:docs}",
     "-RB": "{PLOVER:LAUNCH:coolors}",
     "-BG": "{PLOVER:LAUNCH:colorwheel}",
     "-GS": "{PLOVER:LAUNCH:colorpicker}",
