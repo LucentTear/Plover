@@ -19,6 +19,5 @@
     "-RB": "{PLOVER:LAUNCH:coolors}",
     "-BG": "{PLOVER:LAUNCH:colorwheel}",
     "-GS": "{PLOVER:LAUNCH:colorpicker}",
-    "-DZ": "{PLOVER:LAUNCH:ocam}",
-    "-TDZ": "{PLOVER:CLOSE:ocam}"
+    "-DZ": "{PLOVER:LAUNCH:ocam}"
 }

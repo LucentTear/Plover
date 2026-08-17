@@ -72,10 +72,10 @@ CLOSE_TARGETS = {
     "discord": "Discord.exe",
     "obsidian": "Obsidian.exe",
     "clipstudio": "CLIPStudioPaint.exe",
-    # The recorder only. Its oCamTask.exe helper is deliberately left running:
-    # it has no window for a graceful close to reach, and it runs with an
-    # elevated token, so an unelevated Plover cannot terminate it regardless.
-    "ocam": "oCam.exe",
+    # No oCam entry. Its scheduled task starts oCamTask.exe elevated, and
+    # oCam.exe inherits that token from its parent, so an unelevated Plover is
+    # refused by Windows no matter how it asks. Launching still works (-DZ);
+    # closing is left to oCam's own UI.
 }
 
 
